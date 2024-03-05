@@ -4,7 +4,7 @@ from datasets import load_dataset
 from transformers import BertTokenizer, PreTrainedTokenizer, Trainer, TrainingArguments, BertModel, AdamW
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
-
+import logging
 
 class localDataSet(Dataset):
     def __init__(self, type, local_path):
@@ -71,7 +71,7 @@ def train(dataloader, epoch):
         if i % 5 ==0:
             out = out.arg_max(dim = -1)
             acc = (out == labels).sum().item()/len(labels)
-            print(f"第{i}次，损失为：{loss}，准确率：{acc}")
+            logging.info(f"第{i}次，损失为：{loss}，准确率：{acc}")
 
 
 train(load_data('chn_senti_corp-train.arrow', True), 100)
