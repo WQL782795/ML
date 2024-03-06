@@ -69,7 +69,7 @@ def train(dataloader, epoch):
             optimizer.step()
             optimizer.zero_grad()
         if i % 5 ==0:
-            out = out.arg_max(dim = -1)
+            out = out.argmax(dim = -1)
             acc = (out == labels).sum().item()/len(labels)
             logging.info(f"第{i}次，损失为：{loss}，准确率：{acc}")
 
